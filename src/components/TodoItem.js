@@ -1,37 +1,40 @@
-import React, { useState } from "react"
-import styles from "./TodoItem.module.css"
+/* eslint-disable react/destructuring-assignment */
+import React, { useState } from 'react';
+import styles from './TodoItem.module.css';
 
-const TodoItem = props => {
-  const {clickfunc, deletefunction} = props
+const TodoItem = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const { clickfunc, deletefunction } = props;
 
-  const [editing, setEditing] = useState(false)
+  const [editing, setEditing] = useState(false);
 
   const handleEditing = () => {
-    setEditing(true)
-  }
+    setEditing(true);
+  };
 
-  const handleUpdatedDone = event => {
-    if (event.key === "Enter") {
-      setEditing(false)
+  const handleUpdatedDone = (event) => {
+    if (event.key === 'Enter') {
+      setEditing(false);
     }
-  }
+  };
 
   const completedStyle = {
-    fontStyle: "italic",
-    color: "#595959",
+    fontStyle: 'italic',
+    color: '#595959',
     opacity: 0.4,
-    textDecoration: "line-through",
-  }
+    textDecoration: 'line-through',
+  };
 
-  const { completed, id, title } = props.todo
+  // eslint-disable-next-line react/prop-types
+  const { completed, id, title } = props.todo;
 
-  let viewMode = {}
-  let editMode = {}
+  const viewMode = {};
+  const editMode = {};
 
   if (editing) {
-    viewMode.display = "none"
+    viewMode.display = 'none';
   } else {
-    editMode.display = "none"
+    editMode.display = 'none';
   }
 
   return (
@@ -43,7 +46,7 @@ const TodoItem = props => {
           checked={completed}
           onChange={() => clickfunc(id)}
         />
-        <button onClick={() => deletefunction(id)}>Delete</button>
+        <button type="button" onClick={() => deletefunction(id)}>Delete</button>
         <span style={completed ? completedStyle : null}>{title}</span>
       </div>
       <input
@@ -51,13 +54,14 @@ const TodoItem = props => {
         style={editMode}
         className={styles.textInput}
         value={title}
-        onChange={e => {
-          props.updateitem(e.target.value, id)
+        onChange={(e) => {
+          // eslint-disable-next-line react/destructuring-assignment, react/prop-types
+          props.updateitem(e.target.value, id);
         }}
         onKeyDown={handleUpdatedDone}
       />
     </li>
-  )
-}
+  );
+};
 
-export default TodoItem
+export default TodoItem;
