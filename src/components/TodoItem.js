@@ -1,7 +1,9 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
+  // eslint-disable-next-line react/prop-types
   const { clickfunc, deletefunction } = props;
 
   const [editing, setEditing] = useState(false);
@@ -23,6 +25,7 @@ const TodoItem = (props) => {
     textDecoration: 'line-through',
   };
 
+  // eslint-disable-next-line react/prop-types
   const { completed, id, title } = props.todo;
 
   const viewMode = {};
@@ -43,7 +46,7 @@ const TodoItem = (props) => {
           checked={completed}
           onChange={() => clickfunc(id)}
         />
-        <button onClick={() => deletefunction(id)}>Delete</button>
+        <button type="button" onClick={() => deletefunction(id)}>Delete</button>
         <span style={completed ? completedStyle : null}>{title}</span>
       </div>
       <input
@@ -52,6 +55,7 @@ const TodoItem = (props) => {
         className={styles.textInput}
         value={title}
         onChange={(e) => {
+          // eslint-disable-next-line react/destructuring-assignment, react/prop-types
           props.updateitem(e.target.value, id);
         }}
         onKeyDown={handleUpdatedDone}
